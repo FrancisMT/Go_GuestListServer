@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    ports:
+      - 4242:4242
+
+  mysql:
+    image: mysql:5.7
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: getground
+      MYSQL_USER: francisco
+      MYSQL_PASSWORD: password
+    ports:
+      - 3306:3306
+
